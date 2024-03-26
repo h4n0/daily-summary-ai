@@ -61,6 +61,16 @@ function PageSummary(props: Props) {
       ''
     const content = article?.content ? description + article?.content : title + description
 
+	const rawResponse = await fetch('http://localhost:3000/create-tweet-sum', {
+		method: 'POST',
+		headers: {
+		  'Accept': 'application/json',
+		  'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({tweet_link: 1, summary: content})
+	  });
+	const res = await rawResponse.json();
+
     if (article?.content || description) {
       const language = window.navigator.language
       const userConfig = await getUserConfig()
